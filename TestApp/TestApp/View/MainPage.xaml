@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestApp.MainPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="WhiteSmoke">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="20" />
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="Keyboard" Value="Numeric" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="5,0" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="5,0" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+
+
+            <Style TargetType="Label" x:Key="LabelStyle1">
+                <Setter Property="TextDecorations" Value="Underline" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="FontSize" Value="25" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="DodgerBlue" />
+            </Style>
+
+
+
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <xct:EventToCommandBehavior Command="{Binding OnAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="50,50,*">
+
+        <Label Text="CALCULATE"
+               Style="{StaticResource LabelStyle1}"
+               xct:TouchEffect.Command="{Binding AddCommand}"
+               Margin="20,0" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="1*,100,1*">
+            <Label Grid.Column="0" Text="Prev" FontSize="22"
+                   HorizontalTextAlignment="End"
+                   Style="{StaticResource LabelStyle1}"
+                   xct:TouchEffect.Command="{Binding PrevCommand}" />
+            <DatePicker Grid.Column="1"
+                        Date="{Binding SelectedDate}"
+                        DateSelected="DatePicker_DateSelected"
+                        HorizontalOptions="CenterAndExpand">
+                <DatePicker.Behaviors>
+                    <xct:EventToCommandBehavior Command="{Binding DateSelectedCommand}" EventName="DateSelected" />
+                </DatePicker.Behaviors>
+            </DatePicker>
+            <Label Grid.Column="2" Text="Next" FontSize="22"
+                   Style="{StaticResource LabelStyle1}"
+                   HorizontalOptions="StartAndExpand"
+                   xct:TouchEffect.Command="{Binding NextCommand}" />
+        </Grid>
+
+
+        <ListView Grid.Row="2" x:Name="listView"
+                  ItemsSource="{Binding CalculationList}"
+                  HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame CornerRadius="10" Padding="10" Margin="10"
+                               BorderColor="DodgerBlue"
+                               BackgroundColor="WhiteSmoke"
+                               xct:TouchEffect.Command="{Binding BindingContext.EditCommand, Source={x:Reference listView}}"
+                               xct:TouchEffect.CommandParameter="{Binding .}">
+
+                            <Grid RowDefinitions="20,20" ColumnDefinitions="1*,1*,1*">
+                                <Label Grid.Row="0"
+                                       Text="{Binding Name}"
+                                       FontAttributes="Bold" FontSize="15" />
+
+                                <Label Grid.Row="0" Grid.Column="2"
+                                       Text="{Binding QTY, StringFormat='QTY : {0}'}"
+                                       HorizontalTextAlignment="End" />
+
+
+                                <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                    <Label Text="Entry" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding EntryPrice}" TextColor="DodgerBlue" FontSize="15" FontAttributes="Bold"/>
+                                </StackLayout>
+                                <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
+                                    <Label Text="Stop Loss"  VerticalTextAlignment="Center"></Label>
+                                    <Label TextColor="Red" Text="{Binding StopLoss}" FontSize="15" FontAttributes="Bold"/>
+                                </StackLayout>
+                                <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                    <Label Text="Risk"  VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding Risk}" FontSize="15" FontAttributes="Bold"/>
+                                </StackLayout>
+
+
+                            </Grid>
+                        </Frame>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </Grid>
+</ContentPage>
