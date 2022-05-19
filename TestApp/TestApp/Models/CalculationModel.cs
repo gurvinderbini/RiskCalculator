@@ -32,6 +32,7 @@ namespace TestApp.Models
 
         public double TotalIfTargetHit { get; set; }
         public double TotalIfStopLossHit { get; set; }
+        public double SingleStockTarget { get; set; }
         public double SingleStockProfit { get; set; }
         public double SingleStockLoss { get; set; }
 

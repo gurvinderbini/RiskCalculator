@@ -20,7 +20,6 @@
                 <Setter Property="Keyboard" Value="Numeric" />
             </Style>
             <Style TargetType="Label">
-                <Setter Property="Margin" Value="5,0" />
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="FontSize" Value="12" />
             </Style>
@@ -94,9 +93,19 @@
                                        Text="{Binding Name}"
                                        FontAttributes="Bold" FontSize="15" />
 
-                                <Label Grid.Row="0" Grid.Column="2"
-                                       Text="{Binding QTY, StringFormat='QTY : {0}'}"
-                                       HorizontalTextAlignment="End" />
+
+                                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="Target" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding SingleStockTarget,StringFormat='{0}'}" TextColor="DarkGreen" FontSize="15" FontAttributes="Bold"/>
+                                </StackLayout>
+
+
+                                <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                    <Label Text="QTY"  VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding QTY}" FontSize="15" FontAttributes="Bold"/>
+                                </StackLayout>
+
+                               
 
 
                                 <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">

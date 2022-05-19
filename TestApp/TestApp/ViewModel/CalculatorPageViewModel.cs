@@ -46,9 +46,15 @@ namespace TestApp.ViewModel
             Calculate();
         });
 
-        
 
-            public ICommand BackCommand => new Command(async () =>
+        public ICommand DeleteCommand => new Command(async () =>
+        {
+            CalculationDatabase database = await CalculationDatabase.Instance;
+
+            await database.DeleteItemAsync(CalculationModel);
+            await App.Current.MainPage.Navigation.PopAsync();
+        });
+        public ICommand BackCommand => new Command(async () =>
             {
                 await App.Current.MainPage.Navigation.PopAsync();
             });
@@ -79,6 +85,7 @@ namespace TestApp.ViewModel
                 {
                     CalculationModel.SingleStockLoss = CalculationModel.EntryPrice - CalculationModel.StopLoss;
                     CalculationModel.SingleStockProfit = CalculationModel.SingleStockLoss * 2;
+                    CalculationModel.SingleStockTarget = CalculationModel.EntryPrice + (CalculationModel.SingleStockLoss * 2);
 
                     CalculationModel.QTY = Convert.ToInt32(CalculationModel.Risk / CalculationModel.SingleStockLoss);
                     CalculationModel.LossPer = Math.Round(CalculationModel.SingleStockLoss / CalculationModel.EntryPrice * 100, 2);

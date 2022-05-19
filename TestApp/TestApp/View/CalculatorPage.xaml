@@ -51,7 +51,13 @@
 
             <StackLayout>
 
-                <Label Text="Back" HorizontalOptions="Start" Style="{StaticResource LabelStyle1}" Padding="0,10" xct:TouchEffect.Command="{Binding BackCommand}"></Label>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Back" HorizontalOptions="Start" Style="{StaticResource LabelStyle1}" Padding="0,10" xct:TouchEffect.Command="{Binding BackCommand}"></Label>
+
+                    <Label Text="Delete" HorizontalOptions="EndAndExpand" Style="{StaticResource LabelStyle1}" Padding="0,10" xct:TouchEffect.Command="{Binding DeleteCommand}"></Label>
+                </StackLayout>
+           
+
 
                 <DatePicker Date="{Binding CalculationModel.Date}"></DatePicker>
 
@@ -61,7 +67,7 @@
                 </Entry>
 
 
-                <Grid ColumnDefinitions="1*,1*,1*" RowDefinitions="25,35,15,25,25,25,25,25,25">
+                <Grid ColumnDefinitions="1*,1*,1*" RowDefinitions="25,35,15,25,25,25,25,25,25,25">
                     <Label Grid.Row="0" Grid.Column="0" Text="Entry"></Label>
                     <Label Grid.Row="0" Grid.Column="1" Text="Stop Loss"></Label>
                     <Label Grid.Row="0" Grid.Column="2" Text="Risk"></Label>
@@ -97,28 +103,33 @@
                     </StackLayout>
 
                     <StackLayout Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
+                        <Label Text="SINGLE STOCK TARGET: "></Label>
+                        <Label Text="{Binding CalculationModel.SingleStockTarget}"  Style="{StaticResource LabelStyle1}" TextColor="DarkGreen"></Label>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal">
                         <Label Text="TOTAL AMOUNT TO INVEST: "></Label>
                         <Label Text="{Binding CalculationModel.TotalAmountToInvest}"  Style="{StaticResource LabelStyle1}" TextColor="Black"></Label>
                     </StackLayout>
-                    <Label  Grid.Row="4" Grid.ColumnSpan="3" Text="ADDITIONAL INFO:" FontAttributes="Bold" FontSize="18"></Label>
+                    <Label  Grid.Row="5" Grid.ColumnSpan="3" Text="ADDITIONAL INFO:" FontAttributes="Bold" FontSize="18"></Label>
 
-                    <StackLayout Grid.Row="5" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <StackLayout Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal">
                         <Label Text="TOTAL IF TARGET HIT: "></Label>
                         <Label Text="{Binding CalculationModel.TotalIfTargetHit}"  Style="{StaticResource LabelStyle1}" TextColor="DarkGreen"></Label>
                     </StackLayout>
-                    <StackLayout Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <StackLayout Grid.Row="7" Grid.ColumnSpan="3" Orientation="Horizontal">
                         <Label Text="TOTAL IF STOP LOSS HIT: "></Label>
                         <Label Text="{Binding CalculationModel.TotalIfStopLossHit}"  Style="{StaticResource LabelStyle1}" TextColor="DarkRed"></Label>
                     </StackLayout>
-                    <StackLayout Grid.Row="7" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <StackLayout Grid.Row="8" Grid.ColumnSpan="3" Orientation="Horizontal">
                         <Label Text="SINGLE STOCK PROFIT: "></Label>
                         <Label Text="{Binding CalculationModel.SingleStockProfit}"  Style="{StaticResource LabelStyle1}" TextColor="DarkGreen"></Label>
                     </StackLayout>
-                    <StackLayout Grid.Row="8" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <StackLayout Grid.Row="9" Grid.ColumnSpan="3" Orientation="Horizontal">
                         <Label Text="SINGLE STOCK LOSS: "></Label>
                         <Label Text="{Binding CalculationModel.SingleStockLoss}"  Style="{StaticResource LabelStyle1}" TextColor="DarkRed"></Label>
                     </StackLayout>
-
+                  
                 </Grid>
 
 
